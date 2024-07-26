@@ -22,13 +22,15 @@
 
         <CheckBox x:Name="FogBox" Content="Remove Fog" HorizontalAlignment="Left" Margin="450,90,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="ShadowBox" Content="Remove Shadows" HorizontalAlignment="Left" Margin="450,130,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="ColorModBox" Content="Color Mods" HorizontalAlignment="Left" Margin="450,170,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="ParticleBox" Content="Remove Soft Particles" HorizontalAlignment="Left" Margin="450,210,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="ColorModBox" Content="Color Mods (Unimplemented)" HorizontalAlignment="Left" Margin="450,170,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="ParticleBox" Content="Remove Soft Particles (Unimplemented)" HorizontalAlignment="Left" Margin="450,210,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="RevealBox" Content="Reveal Map" HorizontalAlignment="Left" Margin="450,250,0,0" VerticalAlignment="Top"/>
 
         <CheckBox x:Name="CorpseBox" Content="Remove Corpses" HorizontalAlignment="Left" Margin="50,330,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="ShatterBox" Content="Remove Shatter" HorizontalAlignment="Left" Margin="50,370,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="BloomBox" Content="Remove Bloom" HorizontalAlignment="Left" Margin="50,410,0,0" VerticalAlignment="Top"/>
+        
+        <CheckBox x:Name="MTXBox" Content="Replace Skill Effects From Json" HorizontalAlignment="Left" Margin="50,450,0,0" VerticalAlignment="Top"/>
         
         <Image x:Name="Frog" Margin="456,280,110,70" Source="/frog.png"/>
         <Slider x:Name="ZoomSlider" HorizontalAlignment="Left" Margin="515,50,0,0" VerticalAlignment="Top" Width="120" Maximum="3" Minimum="1" TickPlacement="BottomRight" TickFrequency="0.2" SmallChange="0.2" Value="1" AutoToolTipPlacement="TopLeft" LargeChange="0.2" IsSnapToTickEnabled="True"/>

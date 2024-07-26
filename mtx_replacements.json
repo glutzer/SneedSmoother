@@ -1,0 +1,7 @@
+[
+  {
+    "enabled": true,
+    "skill": "metadata/effects/spells/desecrate",
+    "replacement": "metadata/effects/microtransactions/spells/desecrate_stygian"
+  }
+]

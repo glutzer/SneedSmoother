@@ -33,6 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="mtx_replacements.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="oo2core.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

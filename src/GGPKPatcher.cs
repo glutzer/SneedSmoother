@@ -15,7 +15,6 @@ public class GGPKPatcher
     public string? GGPKPath { get; set; }
     public string CachePath { get; set; }
     public string ModifiedFilesPath { get; set; }
-    public string ZipCachePath { get; set; }
 
     public const string extractJsonPath = "paths_to_extract.json";
 
@@ -97,7 +96,6 @@ public class GGPKPatcher
 
         CachePath = $"{AppDomain.CurrentDomain.BaseDirectory}cache/";
         ModifiedFilesPath = $"{AppDomain.CurrentDomain.BaseDirectory}modifiedfiles/";
-        ZipCachePath = $"{AppDomain.CurrentDomain.BaseDirectory}zipcache/";
     }
 
     /// <summary>
@@ -165,7 +163,6 @@ public class GGPKPatcher
     {
         LoadPathsToSkip();
 
-        if (Directory.Exists(ZipCachePath)) Directory.Delete(ZipCachePath, true);
         if (!Directory.Exists(CachePath))
         {
             window.EmitToConsole("No assets extracted. Extract vanilla assets first.");
@@ -178,7 +175,6 @@ public class GGPKPatcher
         // Ensure directories exist.
         Directory.CreateDirectory(CachePath);
         Directory.CreateDirectory(ModifiedFilesPath);
-        Directory.CreateDirectory(ZipCachePath);
 
         // Check if ggpk exists at path.
         if (GGPKPath == null)
@@ -194,6 +190,7 @@ public class GGPKPatcher
         RemoveSkippedAssets();
 
         PatchGGPKWithModifiedAssets(ggpk, ModifiedFilesPath);
+        if (window.MTXBox.IsChecked == true) ReplaceSkills(ggpk);
 
         ggpk.Dispose();
         GC.Collect();
@@ -347,6 +344,46 @@ public class GGPKPatcher
         if (!Path.GetExtension(path).Equals(".otc")) return null;
 
         return text.Replace("Render\r\n{\r\n}", "Render\r\n{\r\n\tdisable_rendering = true\r\n}");
+    }
+
+    /// <summary>
+    /// Replaces mtx from file.
+    /// </summary>
+    public void ReplaceSkills(BundledGGPK ggpk)
+    {
+        MTXReplacement[] replacements = JsonConvert.DeserializeObject<MTXReplacement[]>(File.ReadAllText("mtx_replacements.json"))!;
+
+        foreach (MTXReplacement replacement in replacements)
+        {
+            if (!replacement.enabled) continue;
+
+            if (!ggpk.Index.TryFindNode(replacement.skill, out ITreeNode? node)) continue;
+
+            string mtxDirectory = $"{AppDomain.CurrentDomain.BaseDirectory}freemtx";
+            if (Directory.Exists(mtxDirectory)) Directory.Delete(mtxDirectory, true);
+
+            string directory = $"{CachePath}{replacement.skill}";
+            string newDirectory = $"{mtxDirectory}/{replacement.skill}";
+
+            // Copy all files from directory to new directory.
+            Directory.CreateDirectory(newDirectory);
+            foreach (string file in Directory.GetFiles(directory))
+            {
+                File.Copy(file, $"{newDirectory}/{Path.GetFileName(file)}");
+            }
+
+            // Zip contents of new directory.
+            if (File.Exists("mtx.zip")) File.Delete("mtx.zip");
+            ZipFile.CreateFromDirectory(mtxDirectory, "mtx.zip");
+
+            ZipArchive archive = ZipFile.OpenRead("mtx.zip");
+
+            LibBundle3.Index.Replace(ggpk.Index, archive.Entries);
+
+            archive.Dispose();
+        }
+
+        if (File.Exists("mtx.zip")) File.Delete("mtx.zip");
     }
 }
 
