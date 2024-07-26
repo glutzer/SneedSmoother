@@ -348,6 +348,7 @@ public class GGPKPatcher
 
     /// <summary>
     /// Replaces mtx from file.
+    /// Will move one directory to another, only replacing files that exist in both directories.
     /// </summary>
     public void ReplaceSkills(BundledGGPK ggpk)
     {
@@ -362,13 +363,19 @@ public class GGPKPatcher
             string mtxDirectory = $"{AppDomain.CurrentDomain.BaseDirectory}freemtx";
             if (Directory.Exists(mtxDirectory)) Directory.Delete(mtxDirectory, true);
 
-            string directory = $"{CachePath}{replacement.skill}";
+            string originalSkillDirectory = $"{CachePath}{replacement.skill}";
+            string skillToCopyDirectory = $"{CachePath}{replacement.replacement}";
+
             string newDirectory = $"{mtxDirectory}/{replacement.skill}";
 
             // Copy all files from directory to new directory.
             Directory.CreateDirectory(newDirectory);
-            foreach (string file in Directory.GetFiles(directory))
+            foreach (string file in Directory.GetFiles(skillToCopyDirectory))
             {
+                // Skip if file doesn't exist in the original directory.
+                string relativePath = file.Replace(skillToCopyDirectory, originalSkillDirectory);
+                if (!File.Exists(relativePath)) continue;
+
                 File.Copy(file, $"{newDirectory}/{Path.GetFileName(file)}");
             }
 
@@ -378,7 +385,9 @@ public class GGPKPatcher
 
             ZipArchive archive = ZipFile.OpenRead("mtx.zip");
 
-            LibBundle3.Index.Replace(ggpk.Index, archive.Entries);
+            int replaced = LibBundle3.Index.Replace(ggpk.Index, archive.Entries);
+
+            window.EmitToConsole($"Replaced {replaced} files for {replacement.skill}.");
 
             archive.Dispose();
         }

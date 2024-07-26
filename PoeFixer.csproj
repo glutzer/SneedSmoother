@@ -14,7 +14,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="frog.png" />
+    <None Remove="cigar.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="cigar.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,12 +28,6 @@
   <ItemGroup>
     <PackageReference Include="LibGGPK3.LibBundledGGPK3" Version="2.5.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="frog.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
 
   <ItemGroup>

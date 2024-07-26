@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PoeFixer"
         mc:Ignorable="d"
+        Background="Yellow"
         Title="SneedSmoother" Height="600" Width="800">
     <Grid>
         <Button Content="Select GGPK" HorizontalAlignment="Left" Margin="50,50,0,0" VerticalAlignment="Top" Width="75" Click="SelectGGPK"/>
@@ -15,7 +16,7 @@
 
         <Button Content="Restore Vanilla Assets" HorizontalAlignment="Left" Margin="150,20,0,0" VerticalAlignment="Top" Width="140" Click="RestoreExtractedAssets"/>
         
-        <TextBox x:Name="Console" HorizontalAlignment="Left" Height="201" Margin="50,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" IsReadOnly="True"/>
+        <TextBox x:Name="Console" Background="LightBlue" HorizontalAlignment="Left" Height="201" Margin="50,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" IsReadOnly="True"/>
 
         <!--Zoom-->
         <CheckBox x:Name="ZoomBox" Content="Zoom" HorizontalAlignment="Left" Margin="450,50,0,0" VerticalAlignment="Top"/>
@@ -31,9 +32,7 @@
         <CheckBox x:Name="BloomBox" Content="Remove Bloom" HorizontalAlignment="Left" Margin="50,410,0,0" VerticalAlignment="Top"/>
         
         <CheckBox x:Name="MTXBox" Content="Replace Skill Effects From Json" HorizontalAlignment="Left" Margin="50,450,0,0" VerticalAlignment="Top"/>
-        
-        <Image x:Name="Frog" Margin="456,280,110,70" Source="/frog.png"/>
         <Slider x:Name="ZoomSlider" HorizontalAlignment="Left" Margin="515,50,0,0" VerticalAlignment="Top" Width="120" Maximum="3" Minimum="1" TickPlacement="BottomRight" TickFrequency="0.2" SmallChange="0.2" Value="1" AutoToolTipPlacement="TopLeft" LargeChange="0.2" IsSnapToTickEnabled="True"/>
-
+        <Image Margin="580,350,0,0" Source="/cigar.png" Stretch="Fill"/>
     </Grid>
 </Window>

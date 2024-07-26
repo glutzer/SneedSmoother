@@ -8,6 +8,7 @@
     "metadata/monsters/monster.ot",
     "metadata/particles/enviro_effects",
     "shaders",
-    "metadata/effects/spells"
+    "metadata/effects/spells",
+    "metadata/effects/microtransactions/spells"
   ]
 }
