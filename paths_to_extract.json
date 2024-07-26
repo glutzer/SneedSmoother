@@ -1,0 +1,13 @@
+{
+  "paths": [
+    "metadata/characters/character.ot",
+    "metadata/statdescriptions",
+    "metadata/ui/uisettings.xml",
+    "metadata/effects/environment",
+    "metadata/environmentsettings",
+    "metadata/monsters/monster.ot",
+    "metadata/particles/enviro_effects",
+    "shaders",
+    "metadata/effects/spells"
+  ]
+}

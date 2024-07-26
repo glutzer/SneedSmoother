@@ -1,0 +1,4 @@
+﻿# If a line does not start with a #, this entire path will be skipped when patching.
+
+# Delirium fog.
+metadata\effects\environment\league_affliction
