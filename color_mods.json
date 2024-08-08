@@ -1,0 +1,6 @@
+{
+  "annotations": {
+    "map_monsters_reflect_%_physical_damage": "heiststolenitem",
+    "map_monsters_reflect_%_elemental_damage": "heiststolenitem"
+  }
+}

@@ -1,7 +1,28 @@
 [
   {
-    "enabled": true,
+    "enabled": false,
     "skill": "metadata/effects/spells/desecrate",
     "replacement": "metadata/effects/microtransactions/spells/desecrate_stygian"
+  },
+  {
+    "enabled": false,
+    "skill": "metadata/effects/spells/lightning_strike_02",
+    "replacement": "metadata/effects/microtransactions/spells/lightning_strike_02/void_emperor"
+  },
+  {
+    "enabled": false,
+    "skill": "metadata/effects/spells/lightning_strike_02/lite",
+    "replacement": "metadata/effects/microtransactions/spells/lightning_strike_02/void_emperor"
+  },
+  {
+    "enabled": false,
+    "skill": "metadata/effects/spells/lightning_strike",
+    "replacement": "metadata/effects/microtransactions/spells/lightning_strike_02/void_emperor"
+  },
+  {
+    "enabled": true,
+    "file": true,
+    "skill": "metadata/effects/microtransactions/character_fx/archnemesis/walk_elemental.epk",
+    "replacement": "metadata/effects/microtransactions/character_fx/spectreskin/epk/stygian_spectre.epk"
   }
 ]

@@ -5,34 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PoeFixer"
         mc:Ignorable="d"
-        Background="Yellow"
-        Title="SneedSmoother" Height="600" Width="800">
-    <Grid>
-        <Button Content="Select GGPK" HorizontalAlignment="Left" Margin="50,50,0,0" VerticalAlignment="Top" Width="75" Click="SelectGGPK"/>
+        Title="SneedSmoother" Height="600" Width="800" Icon="/cigar.ico" ResizeMode="NoResize">
+    <Grid x:Name="mainGrid">
+        <Button Content="Select GGPK" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="SelectGGPK"/>
 
-        <Button Content="Patch" HorizontalAlignment="Left" Margin="325,50,0,0" VerticalAlignment="Top" Width="75" Click="PatchGGPK"/>
+        <Button Content="Patch" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="75" Click="PatchGGPK"/>
 
-        <Button Content="Extract Vanilla Assets" HorizontalAlignment="Left" Margin="150,50,0,0" VerticalAlignment="Top" Width="140" Click="ExtractVanillaAssets"/>
+        <Button Content="Extract Vanilla Assets" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top" Width="140" Click="ExtractVanillaAssets"/>
 
-        <Button Content="Restore Vanilla Assets" HorizontalAlignment="Left" Margin="150,20,0,0" VerticalAlignment="Top" Width="140" Click="RestoreExtractedAssets"/>
+        <Button Content="Restore Vanilla Assets" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top" Width="140" Click="RestoreExtractedAssets"/>
+
+        <TextBox x:Name="Console" Background="LightBlue" HorizontalAlignment="Left" Height="150" Margin="10,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" IsReadOnly="True" FontSize="10"/>
+
+        <!--Settings-->
+        <CheckBox x:Name="zoomEnabled" Content="Zoom" HorizontalAlignment="Left" Margin="300,10,0,0" VerticalAlignment="Top"/>
+        <Slider x:Name="zoomSlider" HorizontalAlignment="Left" Margin="370,10,0,0" VerticalAlignment="Top" Width="120" Maximum="3" Minimum="1" TickPlacement="BottomRight" TickFrequency="0.2" SmallChange="0.2" Value="1" AutoToolTipPlacement="TopLeft" LargeChange="0.2" IsSnapToTickEnabled="True"/>
+
+        <CheckBox x:Name="removeFog" Content="Remove Fog (From Zoom)" HorizontalAlignment="Left" Margin="300,200,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="removeShadows" Content="Remove Sun Shadows" HorizontalAlignment="Left" Margin="300,180,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="colorModsEnabled" Content="Color Mods" HorizontalAlignment="Left" Margin="300,70,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="removeParticles" Content="Remove Particles (Literally All, Experimental)" HorizontalAlignment="Left" Margin="300,90,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="revealEnabled" Content="Reveal Map" HorizontalAlignment="Left" Margin="300,110,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="removeLoadingScreen" Content="Invisible Loading Screen" HorizontalAlignment="Left" Margin="300,130,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="removeLight" Content="Remove Lights" HorizontalAlignment="Left" Margin="300,160,0,0" VerticalAlignment="Top"/>
         
-        <TextBox x:Name="Console" Background="LightBlue" HorizontalAlignment="Left" Height="201" Margin="50,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" IsReadOnly="True"/>
-
-        <!--Zoom-->
-        <CheckBox x:Name="ZoomBox" Content="Zoom" HorizontalAlignment="Left" Margin="450,50,0,0" VerticalAlignment="Top"/>
-
-        <CheckBox x:Name="FogBox" Content="Remove Fog" HorizontalAlignment="Left" Margin="450,90,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="ShadowBox" Content="Remove Shadows" HorizontalAlignment="Left" Margin="450,130,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="ColorModBox" Content="Color Mods (Unimplemented)" HorizontalAlignment="Left" Margin="450,170,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="ParticleBox" Content="Remove Soft Particles (Unimplemented)" HorizontalAlignment="Left" Margin="450,210,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="RevealBox" Content="Reveal Map" HorizontalAlignment="Left" Margin="450,250,0,0" VerticalAlignment="Top"/>
-
-        <CheckBox x:Name="CorpseBox" Content="Remove Corpses" HorizontalAlignment="Left" Margin="50,330,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="ShatterBox" Content="Remove Shatter" HorizontalAlignment="Left" Margin="50,370,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="BloomBox" Content="Remove Bloom" HorizontalAlignment="Left" Margin="50,410,0,0" VerticalAlignment="Top"/>
-        
-        <CheckBox x:Name="MTXBox" Content="Replace Skill Effects From Json" HorizontalAlignment="Left" Margin="50,450,0,0" VerticalAlignment="Top"/>
-        <Slider x:Name="ZoomSlider" HorizontalAlignment="Left" Margin="515,50,0,0" VerticalAlignment="Top" Width="120" Maximum="3" Minimum="1" TickPlacement="BottomRight" TickFrequency="0.2" SmallChange="0.2" Value="1" AutoToolTipPlacement="TopLeft" LargeChange="0.2" IsSnapToTickEnabled="True"/>
-        <Image Margin="580,350,0,0" Source="/cigar.png" Stretch="Fill"/>
+        <CheckBox x:Name="removeCorpses" Content="Remove Corpses" HorizontalAlignment="Left" Margin="10,280,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="removeShatter" Content="Remove Shatter" HorizontalAlignment="Left" Margin="10,300,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="removeBloom" Content="Remove Bloom" HorizontalAlignment="Left" Margin="10,320,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="replaceMtx" Content="Replace Skill Effects From Json" HorizontalAlignment="Left" Margin="10,340,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="removeGoblins" Content="Remove Crying Baby And Goblins" HorizontalAlignment="Left" Margin="10,360,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

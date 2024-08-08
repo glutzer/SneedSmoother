@@ -14,11 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="cigar.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="cigar.png" />
+    <None Remove="cigar.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +27,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="cigar.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="color_mods.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="mtx_replacements.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -1,6 +1,6 @@
 ﻿using LibBundledGGPK3;
+using Microsoft.Win32;
 using System.Diagnostics;
-using System.IO;
 using System.Windows;
 
 namespace PoeFixer;
@@ -10,65 +10,121 @@ namespace PoeFixer;
 /// </summary>
 public partial class MainWindow : Window
 {
-    public GGPKPatcher patcher;
+    public string? GGPKPath { get; set; }
 
     public MainWindow()
     {
-        patcher = new GGPKPatcher(this);
-
         InitializeComponent();
-    }
-
-    private void RestoreExtractedAssets(object sender, RoutedEventArgs e)
-    {
-        if (patcher.GGPKPath == null)
-        {
-            EmitToConsole("GGPK is not selected.");
-            return;
-        }
-
-        // Check if patcher.CachePath exists.
-        if (!Directory.Exists(patcher.CachePath))
-        {
-            EmitToConsole("Cache path does not exist, assets not extracted.");
-            return;
-        }
-
-        using BundledGGPK ggpk = new(patcher.GGPKPath);
-
-        patcher.PatchGGPKWithModifiedAssets(ggpk, patcher.CachePath);
-    }
-
-    private void ExtractVanillaAssets(object sender, RoutedEventArgs e)
-    {
-        int count = patcher.ExtractVanillaAssets();
-        if (count > 0)
-        {
-            EmitToConsole($"{count} assets extracted from GGPK.");
-        }
-    }
-
-    private void SelectGGPK(object sender, RoutedEventArgs e)
-    {
-        if (patcher.GetGGPKPath())
-        {
-            EmitToConsole($"GGPK selected at {patcher.GGPKPath}.");
-        }
-    }
-
-    private void PatchGGPK(object sender, RoutedEventArgs e)
-    {
-        EmitToConsole("Patching GGPK...");
-        Stopwatch sw = new();
-        sw.Start();
-        bool patched = patcher.Patch();
-        sw.Stop();
-        if (patched) EmitToConsole($"GGPK patched in {(int)sw.Elapsed.TotalMilliseconds}ms.");
     }
 
     public void EmitToConsole(string line)
     {
         Console.Text += line + "\n";
         Console.ScrollToEnd();
+    }
+
+    private void RestoreExtractedAssets(object sender, RoutedEventArgs e)
+    {
+        if (GGPKPath == null)
+        {
+            EmitToConsole("GGPK is not selected.");
+            return;
+        }
+
+        // Check if ggpk extension is .ggpk.
+        if (GGPKPath.EndsWith(".ggpk"))
+        {
+            BundledGGPK ggpk = new(GGPKPath);
+            PatchManager manager = new(ggpk.Index, this);
+            int count = manager.RestoreExtractedAssets();
+            ggpk.Dispose();
+            EmitToConsole($"{count} assets restored.");
+        }
+
+        if (GGPKPath.EndsWith(".bin"))
+        {
+            LibBundle3.Index index = new(GGPKPath);
+            PatchManager manager = new(index, this);
+            int count = manager.RestoreExtractedAssets();
+            index.Dispose();
+            EmitToConsole($"{count} assets restored.");
+        }
+    }
+
+    private void ExtractVanillaAssets(object sender, RoutedEventArgs e)
+    {
+        if (GGPKPath == null)
+        {
+            EmitToConsole("GGPK is not selected.");
+            return;
+        }
+
+        if (GGPKPath.EndsWith(".ggpk"))
+        {
+            BundledGGPK ggpk = new(GGPKPath);
+            FileExtractor extractor = new(ggpk.Index);
+            int count = extractor.ExtractFiles();
+            ggpk.Dispose();
+            EmitToConsole($"{count} assets extracted.");
+        }
+
+        if (GGPKPath.EndsWith(".bin"))
+        {
+            LibBundle3.Index index = new(GGPKPath);
+            FileExtractor extractor = new(index);
+            int count = extractor.ExtractFiles();
+            index.Dispose();
+            EmitToConsole($"{count} assets extracted.");
+        }
+    }
+
+    private void SelectGGPK(object sender, RoutedEventArgs e)
+    {
+        // Open file dialogue to select either a .ggpk or .bin file.
+        OpenFileDialog dlg = new()
+        {
+            DefaultExt = ".ggpk",
+            Filter = "GGPK Files (*.ggpk, *.bin)|*.ggpk;*.bin"
+        };
+
+        if (dlg.ShowDialog() == true)
+        {
+            GGPKPath = dlg.FileName;
+            EmitToConsole($"GGPK selected: {GGPKPath}.");
+        }
+    }
+
+    private void PatchGGPK(object sender, RoutedEventArgs e)
+    {
+        if (GGPKPath == null)
+        {
+            EmitToConsole("GGPK is not selected.");
+            return;
+        }
+
+        EmitToConsole("Patching GGPK...");
+        Stopwatch sw = new();
+        sw.Start();
+
+        if (GGPKPath.EndsWith(".ggpk"))
+        {
+            BundledGGPK ggpk = new(GGPKPath);
+            PatchManager manager = new(ggpk.Index, this);
+            int count = manager.Patch();
+            ggpk.Dispose();
+            EmitToConsole($"{count} assets patched.");
+        }
+
+        if (GGPKPath.EndsWith(".bin"))
+        {
+            LibBundle3.Index index = new(GGPKPath);
+            PatchManager manager = new(index, this);
+            int count = manager.Patch();
+            index.Dispose();
+            EmitToConsole($"{count} assets patched.");
+        }
+
+        sw.Stop();
+        EmitToConsole($"GGPK patched in {(int)sw.Elapsed.TotalMilliseconds}ms.");
     }
 }
