@@ -45,7 +45,8 @@ public class ZoomPatch : IPatch
 
                     int end = lines[i].IndexOf(')', start);
 
-                    lines[i] = lines[i][..start] + $"CreateCameraZoomNode(1000000, 1000000, {zoomLevel})" + lines[i][(end + 1)..];
+                    string zoomLevelString = zoomLevel.ToString().Replace(',', '.');
+                    lines[i] = lines[i][..start] + $"CreateCameraZoomNode(1000000, 1000000, {zoomLevelString})" + lines[i][(end + 1)..];
                 }
             }
 
@@ -61,7 +62,8 @@ public class ZoomPatch : IPatch
 
             if (index == -1) return text;
 
-            lines.Insert(index + 1, $"\ton_initial_position_set = \"CreateCameraZoomNode(1000000, 1000000, {zoomLevel});\"");
+            string zoomLevelString = zoomLevel.ToString().Replace(',', '.');
+            lines.Insert(index + 1, $"\ton_initial_position_set = \"CreateCameraZoomNode(1000000, 1000000, {zoomLevelString});\"");
 
             return string.Join("\r\n", lines);
         }
