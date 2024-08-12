@@ -31,7 +31,20 @@ jobs:
       - name: Publish project
         run: dotnet publish PoeFixer.csproj -c Release -o ./output
 
+      - name: Check if tag exists
+        id: check_tag
+        run: |
+          TAG_NAME="${{ github.event.inputs.tag_name }}"
+          if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
+            echo "Tag '$TAG_NAME' already exists."
+            echo "::set-output name=tag_exists::true"
+          else
+            echo "Tag '$TAG_NAME' does not exist."
+            echo "::set-output name=tag_exists::false"
+          fi
+
       - name: Create a tag
+        if: steps.check_tag.outputs.tag_exists == 'false'
         run: |
           git tag ${{ github.event.inputs.tag_name }}
           git push origin ${{ github.event.inputs.tag_name }}
