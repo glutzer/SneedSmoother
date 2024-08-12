@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <None Include=".editorconfig" />
+    <None Include=".github\workflows\release-action.yml" />
   </ItemGroup>
 
   <ItemGroup>
