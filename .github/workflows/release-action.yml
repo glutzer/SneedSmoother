@@ -31,6 +31,13 @@ jobs:
       - name: Publish project
         run: dotnet publish PoeFixer.csproj -c Release -o ./output
 
+      - name: Create a tag
+        run: |
+          git tag ${{ github.event.inputs.tag_name }}
+          git push origin ${{ github.event.inputs.tag_name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v1
