@@ -35,7 +35,7 @@ jobs:
         id: check_tag
         run: |
           TAG_NAME="${{ github.event.inputs.tag_name }}"
-          if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
+          if (git rev-parse "$TAG_NAME" >/dev/null 2>&1;) then
             echo "Tag '$TAG_NAME' already exists."
             echo "::set-output name=tag_exists::true"
           else
