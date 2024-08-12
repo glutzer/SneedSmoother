@@ -1,9 +1,13 @@
 name: Build and Release
 
+
 on:
-  push:
-    tags:
-      - 'v*'  # Triggers the workflow on tags that start with "v".
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Tag name for the release (e.g., v1.0.0)'
+        required: true
+        default: 'v1.0.0'
 
 jobs:
   build:
@@ -31,7 +35,7 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          tag: ${{ github.ref }}
+          tag: ${{ github.event.inputs.tag_name }}
           files: ./output/**
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
