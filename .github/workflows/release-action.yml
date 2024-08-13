@@ -30,6 +30,9 @@ jobs:
 
       - name: Publish project
         run: dotnet publish PoeFixer.csproj -c Release -o ./output
+     
+      - name: Install zip
+        run: sudo apt-get install -y zip
 
       - name: Zip program
         run: zip -r sneedsmoother.zip ./output
