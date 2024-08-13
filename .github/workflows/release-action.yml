@@ -31,6 +31,9 @@ jobs:
       - name: Publish project
         run: dotnet publish PoeFixer.csproj -c Release -o ./output
 
+      - name: Zip program
+        run: zip -r sneedsmoother.zip ./output
+
       - name: Create a tag
         run: |
           git tag ${{ github.event.inputs.tag_name }}
@@ -43,6 +46,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ github.event.inputs.tag_name }}
-          files: ./output/**
+          files: sneedsmoother.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
