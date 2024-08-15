@@ -15,7 +15,8 @@ public class ZoomPatch : IPatch
         "metadata/terrain/leagues/harvest/objects/soultree.otc",
         "metadata/terrain/leagues/settlers/objects/zoom_node.otc",
         "metadata/terrain/missions/hideouts/atlashideout/objects/optdevicezoom.otc",
-        "metadata/terrain/testareas/programming/objects/zoom_node.otc"
+        "metadata/terrain/testareas/programming/objects/zoom_node.otc",
+        "metadata/monsters/atlasexiles/orionarenaobjects/orionapparitionhideout.otc" // When he spawns there's a clear zoom node.
         ];
 
     public string[] DirectoriesToPatch => ["metadata/miscellaneousobjects/camerazoom/"];
@@ -46,7 +47,7 @@ public class ZoomPatch : IPatch
                     int end = lines[i].IndexOf(')', start);
 
                     string zoomLevelString = zoomLevel.ToString().Replace(',', '.');
-                    lines[i] = lines[i][..start] + $"CreateCameraZoomNode(1000000, 1000000, {zoomLevelString})" + lines[i][(end + 1)..];
+                    lines[i] = lines[i][..start] + $"CreateCameraZoomNode(1, 1, {zoomLevelString})" + lines[i][(end + 1)..];
                 }
             }
 
