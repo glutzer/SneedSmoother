@@ -34,5 +34,6 @@
         <CheckBox x:Name="removeBloom" Content="Remove Bloom" HorizontalAlignment="Left" Margin="10,320,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="replaceMtx" Content="Replace Skill Effects From Json" HorizontalAlignment="Left" Margin="10,340,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="removeGoblins" Content="Remove Crying Baby And Goblins" HorizontalAlignment="Left" Margin="10,360,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="removeDelirium" Content="Remove Delirium Effects" HorizontalAlignment="Left" Margin="10,380,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
