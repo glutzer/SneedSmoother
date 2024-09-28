@@ -14,6 +14,9 @@ public class FogPatch : IPatch
     {
         text = text.Replace("area", "xrea");
         text = text.Replace("fog", "xog");
+        text = text.Replace("water", "xater");
+        text = text.Replace("post", "xost");
+        text = text.Replace("camera", "xamera");
         return text;
     }
 

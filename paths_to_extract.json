@@ -1,6 +1,8 @@
 {
   "paths": [
     "metadata",
-    "shaders"
+    "shaders/bloomgather.hlsl",
+    "shaders/minimap_visibility_pixel.hlsl",
+    "shaders/minimap_blending_pixel.hlsl"
   ]
 }

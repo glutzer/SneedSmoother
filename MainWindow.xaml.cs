@@ -1,4 +1,4 @@
-﻿using LibBundledGGPK3;
+﻿﻿using LibBundledGGPK3;
 using Microsoft.Win32;
 using System.Diagnostics;
 using System.Windows;
